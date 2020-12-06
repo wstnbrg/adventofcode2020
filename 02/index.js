@@ -1,3 +1,4 @@
+const { error } = require('console');
 const fs = require('fs');
 const { ppid } = require('process');
 
@@ -15,8 +16,8 @@ try {
 
         dataArray.push({
             policy: {
-                min: policyRange[0],
-                max: policyRange[1],
+                pos1: policyRange[0],
+                pos2: policyRange[1],
                 letter: policyData[1]
             },
             password: lineData[1].trim()
@@ -28,10 +29,11 @@ try {
 
 dataArray.forEach((pw) => {
     let string = String(pw.password);
-    let regex = new RegExp(pw.policy.letter, 'g');
- 
-    if ((string.match(regex) || []).length >= pw.policy.min) {
-        if ((string.match(regex) || []).length <= pw.policy.max) {
+
+    if (string.charAt(pw.policy.pos1 - 1) == pw.policy.letter ||
+        string.charAt(pw.policy.pos2 - 1) == pw.policy.letter
+    ) {
+        if (string.charAt(pw.policy.pos1 - 1) != string.charAt(pw.policy.pos2 - 1)) {
             found++;
         }
     }
