@@ -19,13 +19,19 @@ dataArray.forEach((number1) => {
         return;
     }
     dataArray.forEach((number2) => {
-        if (number1 + number2 == 2020 &&
-            number1 !== number2
-        ) {
-            console.log('Answer: ' + number1 * number2);
-            found = true;
+        if (found) {
             return;
         }
+        dataArray.forEach((number3) => {
+            if (number1 + number2 + number3 == 2020 &&
+                number1 !== number2 &&
+                number3 !== number2
+            ) {
+                console.log('Answer: ' + number1 * number2 * number3);
+                found = true;
+                return;
+            }
+        });
     });
 });
 
