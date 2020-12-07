@@ -47,15 +47,14 @@ dataArray.forEach((line) => {
     seatIds.push(seatId);
 });
 
-var highestSeatId = 0;
-
 seatIds.forEach((seat) => {
-    if (seat > highestSeatId) {
-        highestSeatId = seat;
+    if (seatIds.includes(seat - 2) &&
+        !seatIds.includes(seat - 1)
+    ) {
+        console.log('try: ', seat -1);
     }
 });
 
-console.log('Answer: ', highestSeatId);
 
 function checkHalf(halfIndikator, range) {
     half = parseInt(((range.max +1) - range.min) / 2);
